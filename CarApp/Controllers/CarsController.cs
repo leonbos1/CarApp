@@ -7,7 +7,7 @@ namespace CarApp.Controllers
     public class CarsController : Controller
     {
 
-        private static List<CarsViewModel> cars = new List<CarsViewModel>();
+        private static List<CarViewModel> cars = new List<CarViewModel>();
         public IActionResult Index()
         {
 
@@ -16,11 +16,11 @@ namespace CarApp.Controllers
 
         public IActionResult Create()
         {
-            var CarsViewModel = new CarsViewModel();
+            var CarsViewModel = new CarViewModel();
             return View(CarsViewModel);
         }
 
-        public IActionResult CreateCar(CarsViewModel carsViewModel)
+        public IActionResult CreateCar(CarViewModel carsViewModel)
         {
             Random random = new Random();
             carsViewModel.Id = random.Next(100000000);
