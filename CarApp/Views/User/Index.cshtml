@@ -1,0 +1,23 @@
+﻿@model List<CarApp.Models.UserModel>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>These are the users:</h1>
+
+@foreach (var user in Model) {
+<div class="row">
+    <button style="width=5vw" class="btn btn-danger" onclick="console.log(@user.Id)"></button>
+
+    <p>Firstname: @user.Firstname </p>
+    <p><br>Lastname: @user.Lastname</p>
+</div>
+}
+
+
+<div>
+   
+</div>
