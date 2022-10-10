@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarApp.Models.UserModel>
+﻿@model IEnumerable<CarApp.Models.User>
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,11 +22,11 @@
                 <div class="card-body">
                     <p>Firstname: @user.Firstname</p>
                     <p>Lastname: @user.Lastname</p>
-                    <p>Age: @user.age</p>
+                    <p>Age: @user.Age</p>
 
                     <form asp-controller="User" asp-action="RemoveUser" method="post">
 
-                        <input type="hidden" name="id" asp-for="@user.Id" class="form-control" />
+                        <input type="hidden" name="id" asp-for="@user.UserId" class="form-control" />
 
                         <button type="submit" class="btn btn-danger">Remove</button>
                     </form>

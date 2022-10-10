@@ -9,8 +9,8 @@ namespace CarApp.Controllers
 
         public IActionResult Index()
         {
-            var users = from user in db.Users
-            orderby user.Id
+            var users = from user in db.User
+            orderby user.UserId
             select user;
 
             return View(users);
@@ -18,18 +18,18 @@ namespace CarApp.Controllers
 
         public IActionResult Create()
         {
-            var userModel = new UserModel();
+            var userModel = new User();
             return View(userModel);
         }
 
-        public IActionResult CreateUser(UserModel userModel)
+        public IActionResult CreateUser(User userModel)
         {
             Random random = new Random();
-            userModel.Id = random.Next(100000000);
+            userModel.UserId = random.Next(100000000);
 
             try
             {
-                db.Users.Add(userModel);
+                db.User.Add(userModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

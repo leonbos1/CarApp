@@ -1,4 +1,4 @@
-﻿@model CarViewModel
+﻿@model CarApp.Models.Car
 
 
 <h1>Sell car</h1>
@@ -32,13 +32,6 @@
 
                     <div class="mb-3">
                         <label class="form-label">
-                            Price
-                        </label>
-                        <input asp-for="Price" type="number" class="form-control" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">
                             Lincense Plate
                         </label>
                         <input asp-for="LincensePlate" type="text" class="form-control" />
@@ -63,6 +56,13 @@
                             Body Type
                         </label>
                         <input asp-for="bodyType" type="text" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            User id
+                        </label>
+                        <input asp-for="User" type="number" class="form-control" />
                     </div>
 
                     <div class="mb-3">

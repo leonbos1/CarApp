@@ -7,33 +7,42 @@ namespace CarApp.Controllers
     public class CarsController : Controller
     {
 
-        private static List<CarViewModel> cars = new List<CarViewModel>();
+        private static List<Car> cars = new List<Car>();
         private EmpDBContext db = new EmpDBContext();
      
         public IActionResult Index()
         {
 
-            var cars = from car in db.Cars
-                        orderby car.Id
-                        select car;
+            var auctions = (from a in db.Auction
 
-            return View(cars);
+                            join c in db.Car on a.CarId equals c.CarId
+                            join u in db.User on c.UserId equals u.UserId
+
+                           select new CarAuction
+                           {
+                               Auction = a,
+                               Car = c,
+                               User = u
+                           }).ToList();
+
+
+            return View(auctions);
         }
 
         public IActionResult Create()
         {
-            var CarsViewModel = new CarViewModel();
+            var CarsViewModel = new Car();
             return View(CarsViewModel);
         }
 
-        public IActionResult CreateCar(CarViewModel carsViewModel)
+        public IActionResult CreateCar(Auction auction)
         {
             Random random = new Random();
-            carsViewModel.Id = random.Next(100000000);
+            auction.AuctionId = random.Next(100000000);
 
             try
             {
-                db.Cars.Add(carsViewModel);
+                db.Auction.Add(auction);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -47,8 +56,8 @@ namespace CarApp.Controllers
 
         public IActionResult BuyCar(int id)
         {
-            CarViewModel car = db.Cars.Where(d => d.Id == id).First();
-            db.Cars.Remove(car);
+            Car car = db.Car.Where(d => d.CarId == id).First();
+            db.Car.Remove(car);
             db.SaveChanges();
 
             return RedirectToAction(nameof(Index));

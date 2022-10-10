@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarApp.Models.CarViewModel>
+﻿@model IEnumerable<CarApp.Models.CarAuction>
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,23 +12,23 @@
 <div class="row">
     <div class="col-6">
 
-        @foreach (var car in Model)
+        @foreach (var carAuction in Model)
         {
             <div class="card">
 
                 <div class="card-header">
-                    <h5>@car.Brand @car.Model</h5>
+                    <h5>@carAuction.Car.Brand @carAuction.Car.Model</h5>
                 </div>
 
                 <div class="card-body">
-                    <p>Price: €@car.Price</p>
-                    <p>License Plate: @car.LincensePlate</p>
-                    <p>Engine: @car.Engine</p>
-                    <p>Build Year @car.BuildYear</p>
-                    <p>Body Type: @car.bodyType</p>
+                    <p>Seller: @carAuction.User.Firstname @carAuction.User.Lastname</p>
+                    <p>License Plate: @carAuction.Car.LincensePlate</p>
+                    <p>Engine: @carAuction.Car.Engine</p>
+                    <p>Build Year @carAuction.Car.BuildYear</p>
+                    <p>Body Type: @carAuction.Car.bodyType</p>
                     <form asp-controller="Cars" asp-action="BuyCar" method="post">
-                     
-                            <input type="hidden" name="id" asp-for="@car.Id" class="form-control" />
+
+                        <input type="hidden" name="id" asp-for="@carAuction.Car.CarId" class="form-control" />
                       
                             <button type="submit" class="btn btn-primary">Buy</button>
                     </form>
