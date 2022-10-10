@@ -5,11 +5,14 @@ namespace CarApp.Controllers
 {
     public class UserController : Controller
     {
-        private static List<UserModel> users = new List<UserModel>();
-        
+        private EmpDBContext db = new EmpDBContext();
+
         public IActionResult Index()
         {
-            
+            var users = from user in db.Users
+            orderby user.Id
+            select user;
+
             return View(users);
         }
 
@@ -23,8 +26,17 @@ namespace CarApp.Controllers
         {
             Random random = new Random();
             userModel.Id = random.Next(100000000);
-            users.Add(userModel);
-            return RedirectToAction(nameof(Create));
+
+            try
+            {
+                db.Users.Add(userModel);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
 
         }
     }
